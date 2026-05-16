@@ -1,0 +1,20 @@
+Listagem de caminhos de pasta
+
+:.
+|   estrutura.txt
+|   README.md
+|   requirements.txt
+|   smartcity.db
+|   
++---backend
+|       app teste simples.py
+|       app.py
+|       database.py
+|       smartcity.db
+|       
+\---frontend
+        index.html
+        script.js
+        script_js.txt
+        style.css
+        

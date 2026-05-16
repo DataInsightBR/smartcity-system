@@ -1,0 +1,61 @@
+// URL pública de exemplo da API
+const API = "https://api-exemplo.com";
+
+// lista de marcadores do mapa
+let markers = [];
+
+
+// =========================================
+// CARREGAR PROBLEMAS
+// =========================================
+
+async function carregarProblemas() {
+
+  try {
+
+    // buscar dados da API
+    const resposta = await fetch(
+      `${API}/api/problemas`
+    );
+
+    const dados = await resposta.json();
+
+    // remover marcadores antigos
+    markers.forEach(marker => {
+      map.removeLayer(marker);
+    });
+
+    markers = [];
+
+    // adicionar novos marcadores
+    dados.forEach(problema => {
+
+      const marker = L.marker([
+        parseFloat(problema.lat),
+        parseFloat(problema.lng)
+      ])
+
+      .addTo(map)
+
+      .bindPopup(`
+        <b>${problema.tipo}</b><br>
+        ${problema.descricao || ""}
+      `);
+
+      markers.push(marker);
+
+    });
+
+  } catch (erro) {
+
+    console.error(
+      "Erro ao carregar problemas:",
+      erro
+    );
+
+  }
+
+}
+
+// iniciar carregamento
+carregarProblemas();
